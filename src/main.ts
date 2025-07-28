@@ -6,11 +6,6 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 async function bootstrap() {
   try {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
-    app.enableCors({
-      origin: process.env.FRONTEND_URL,
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-    });
 
     await app.listen(PORT);
     console.log(`Application is running on: ${await app.getUrl()}`);
