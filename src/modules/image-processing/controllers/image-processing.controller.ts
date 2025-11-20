@@ -5,6 +5,7 @@ import {
   UploadedFile,
   UseInterceptors,
   Req,
+  Get,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageService } from '../services/images.service';
@@ -16,6 +17,11 @@ import { Request } from 'express';
 @Controller('image')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
+
+  @Get('test')
+  async test() {
+    return this.imageService.testModelA();
+  }
 
   @Post('process')
   @UseInterceptors(FileInterceptor('image'))

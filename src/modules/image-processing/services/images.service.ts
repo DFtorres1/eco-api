@@ -10,6 +10,13 @@ export class ImageService {
     private readonly gateway: ImageGateway,
   ) {}
 
+  async testModelA() {
+  const fs = require('fs');
+  const img = fs.readFileSync('test.jpg');
+  const result = await this.grpcClient.callModel('MODEL_A', img);
+  return result;
+}
+
   async processImage(
     imageBuffer: Buffer,
     clientId: string,
@@ -21,7 +28,6 @@ export class ImageService {
         const result = await this.grpcClient.callModel(
           modelName,
           imageBuffer,
-          id,
         );
         this.gateway.sendPartialResult(clientId, modelName, result);
         return { modelName, result };

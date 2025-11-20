@@ -1,13 +1,13 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { Observable, lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 interface ModelService {
-  processImage(data: {
-    request_id: string;
-    image: Buffer;
-    model_name: string;
-  }): Observable<any>;
+  ProcessImage(data: { imageBuffer: Buffer }): Observable<{
+    accuracy: number;
+    executionTime: number;
+    hardware: string;
+  }>;
 }
 
 @Injectable()
@@ -30,16 +30,11 @@ export class GrpcClientService implements OnModuleInit {
     );
   }
 
-  async callModel(
-    modelName: string,
-    image: Buffer,
-    requestId: string,
-  ): Promise<any> {
-    const data = { request_id: requestId, image, model_name: modelName };
+  async callModel(modelName: string, image: Buffer): Promise<any> {
     const service = this.services.get(modelName);
     if (!service) throw new Error(`Model service not found: ${modelName}`);
 
-    const response$ = service.processImage(data);
+    const response$ = service.ProcessImage({ imageBuffer: image });
     return await lastValueFrom(response$);
   }
 }
