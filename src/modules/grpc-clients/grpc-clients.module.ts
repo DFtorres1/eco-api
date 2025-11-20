@@ -1,31 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule } from '@nestjs/microservices';
 import { GrpcClientService } from './services/grpc-clients.service';
-import { join } from 'path';
+import { ModelsServers } from './grpc.constants';
 
 @Module({
-  imports: [
-    ClientsModule.register([
-      {
-        name: 'MODEL_A',
-        transport: Transport.GRPC,
-        options: {
-          package: 'model',
-          protoPath: join(__dirname, 'proto/model.proto'),
-          url: 'localhost:50051',
-        },
-      },
-      {
-        name: 'MODEL_B',
-        transport: Transport.GRPC,
-        options: {
-          package: 'model',
-          protoPath: join(__dirname, 'proto/model.proto'),
-          url: 'localhost:50051',
-        },
-      },
-    ]),
-  ],
+  imports: [ClientsModule.register(ModelsServers)],
   providers: [GrpcClientService],
   exports: [GrpcClientService],
 })

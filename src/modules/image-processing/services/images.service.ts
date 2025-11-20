@@ -11,11 +11,11 @@ export class ImageService {
   ) {}
 
   async testModelA() {
-  const fs = require('fs');
-  const img = fs.readFileSync('test.jpg');
-  const result = await this.grpcClient.callModel('MODEL_A', img);
-  return result;
-}
+    const fs = require('fs');
+    const img = fs.readFileSync('test.jpg');
+    const result = await this.grpcClient.callModel('MODEL_A', img);
+    return result;
+  }
 
   async processImage(
     imageBuffer: Buffer,
@@ -25,10 +25,7 @@ export class ImageService {
     const promises = models.map(async (modelName) => {
       try {
         const id = randomUUID();
-        const result = await this.grpcClient.callModel(
-          modelName,
-          imageBuffer,
-        );
+        const result = await this.grpcClient.callModel(modelName, imageBuffer);
         this.gateway.sendPartialResult(clientId, modelName, result);
         return { modelName, result };
       } catch (err) {
