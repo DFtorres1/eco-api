@@ -43,7 +43,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50052',
     },
   },
   {
@@ -52,7 +52,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50053',
     },
   },
   {
@@ -61,7 +61,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50054',
     },
   },
   {
@@ -70,7 +70,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50055',
     },
   },
   {
@@ -79,7 +79,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50056',
     },
   },
   {
@@ -88,7 +88,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50057',
     },
   },
   {
@@ -97,7 +97,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50058',
     },
   },
   {
@@ -106,7 +106,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50059',
     },
   },
   {
@@ -115,7 +115,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50060',
     },
   },
   {
@@ -124,7 +124,7 @@ export const Models: ModelPropertires[] = [
     transport: Transport.GRPC,
     options: {
       ...sharedOptions,
-      url: 'localhost:50051',
+      url: 'localhost:50061',
     },
   },
 ];
