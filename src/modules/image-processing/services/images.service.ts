@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ImageGateway } from '../websocket/image.gateway';
 import { GrpcClientService } from 'src/modules/grpc-clients/services/grpc-clients.service';
 import { randomUUID } from 'crypto';
+import { Models } from 'src/modules/grpc-clients/grpc.constants';
 
 @Injectable()
 export class ImageService {
@@ -15,6 +16,16 @@ export class ImageService {
     const img = fs.readFileSync('test.jpg');
     const result = await this.grpcClient.callModel('MODEL_A', img);
     return result;
+  }
+
+  async getModels() {
+    const models = Models.map((model) => {
+      return {
+        name: model.name,
+        type: model.recognizes,
+      };
+    });
+    return models;
   }
 
   async processImage(

@@ -31,20 +31,9 @@ async function bootstrap() {
 
     app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
-    // const modelService = app.connectMicroservice<MicroserviceOptions>({
-    //   transport: Transport.GRPC,
-    //   options: {
-    //     package: 'model', // name of the package in your proto
-    //     protoPath: join(__dirname, './proto/model.proto'),
-    //     url: '0.0.0.0:50051', // gRPC server address of the model service
-    //   },
-    // });
-
-    // await app.startAllMicroservices();
     await app.listen(PORT);
     console.log(`Application is running on: ${await app.getUrl()}`);
     console.log(`Watch for the Docs on: ${await app.getUrl()}/docs`);
-    // console.log(`Active microservices: ${await app.getMicroservices()}`);
   } catch (error) {
     console.error('Error during application bootstrap: ', error);
     process.exit(1);

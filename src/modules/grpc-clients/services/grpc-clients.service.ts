@@ -1,6 +1,8 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { ClientGrpc } from '@nestjs/microservices';
 import { lastValueFrom, Observable } from 'rxjs';
+import { Models } from '../grpc.constants';
 
 interface ModelService {
   ProcessImage(data: { imageBuffer: Buffer }): Observable<{
@@ -14,20 +16,21 @@ interface ModelService {
 export class GrpcClientService implements OnModuleInit {
   private readonly services = new Map<string, ModelService>();
 
-  constructor(
-    @Inject('MODEL_A') private readonly modelAClient: ClientGrpc,
-    @Inject('MODEL_B') private readonly modelBClient: ClientGrpc,
-  ) {}
+  constructor(private readonly moduleRef: ModuleRef) {}
 
   onModuleInit() {
-    this.services.set(
-      'MODEL_A',
-      this.modelAClient.getService<ModelService>('ModelService'),
-    );
-    this.services.set(
-      'MODEL_B',
-      this.modelBClient.getService<ModelService>('ModelService'),
-    );
+    Models.forEach((model) => {
+      const client = this.moduleRef.get<ClientGrpc>(model.name, {
+        strict: false,
+      });
+
+      if (!client) {
+        throw new Error(`GRPC client not found for model: ${model.name}`);
+      }
+
+      const service = client.getService<ModelService>('ModelService');
+      this.services.set(model.name, service);
+    });
   }
 
   async callModel(modelName: string, image: Buffer): Promise<any> {

@@ -23,6 +23,11 @@ export class ImageController {
     return this.imageService.testModelA();
   }
 
+  @Get('models')
+  async getModels() {
+    return this.imageService.getModels();
+  }
+
   @Post('process')
   @UseInterceptors(FileInterceptor('image'))
   @ApiConsumes('multipart/form-data')
